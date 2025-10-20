@@ -32,7 +32,7 @@ public class DelimiterHandler {
 
 
     // 숫자 부분을 구분자를 기준으로 배열로 분리
-    public String[] splitNumbers(String input) {
+    public String[] parseAndSplitInput(String input) {
         ParseResult result = parseInput(input);
 
         StringBuilder regexBuilder = new StringBuilder();

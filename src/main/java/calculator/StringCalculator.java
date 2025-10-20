@@ -21,7 +21,7 @@ public class StringCalculator {
         }
 
         // DelimiterHandler를 사용하여 입력 문자열에서 숫자 부분을 구분자 기준으로 분리
-        String[] numbers = delimiterHandler.splitNumbers(input);
+        String[] numbers = delimiterHandler.parseAndSplitInput(input);
         int sum = 0;
 
         for (String numStr : numbers) {
