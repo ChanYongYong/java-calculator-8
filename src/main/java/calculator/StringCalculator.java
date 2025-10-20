@@ -12,7 +12,7 @@ public class StringCalculator {
     //입력 문자열을 받아 숫자를 합산
     public int calculate(String input) {
         if (input == null || input.trim().isEmpty()) {
-            return 0;
+            throw new IllegalArgumentException("Empty string cannot be calculated.");
         }
 
         String[] numbers = delimiterHandler.parseAndSplitInput(input);
