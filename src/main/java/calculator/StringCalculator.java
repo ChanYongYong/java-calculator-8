@@ -9,38 +9,44 @@ public class StringCalculator {
         this.delimiterHandler = new DelimiterHandler();
     }
 
-    /**
-     * 입력 문자열을 받아 숫자를 합산
-     * @param input 사용자 입력 문자열
-     * @return 숫자 합계
-     * @throws IllegalArgumentException 음수나 잘못된 숫자 형식일 경우
-     */
+    //입력 문자열을 받아 숫자를 합산
     public int calculate(String input) {
         if (input == null || input.trim().isEmpty()) {
-            return 0; // 빈 문자열은 0 반환
+            return 0;
         }
 
-        // DelimiterHandler를 사용하여 입력 문자열에서 숫자 부분을 구분자 기준으로 분리
         String[] numbers = delimiterHandler.parseAndSplitInput(input);
+        return sumNumbers(numbers);
+    }
+
+    // 문자열 배열을 숫자로 변환하고 합산
+    private int sumNumbers(String[] numbers) {
         int sum = 0;
 
         for (String numStr : numbers) {
             if (numStr.isEmpty()) continue;
 
-            int number;
-            try {
-                number = Integer.parseInt(numStr); // 문자열을 숫자로 변환
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형식: " + numStr);
-            }
-
-            if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
-            }
-
+            int number = parseToPositiveInteger(numStr);
             sum += number;
         }
 
         return sum;
     }
+
+    // 문자열을 양수 정수로 변환
+    private int parseToPositiveInteger(String numStr) {
+        int number;
+        try {
+            number = Integer.parseInt(numStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 숫자 형식: " + numStr);
+        }
+
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+        }
+
+        return number;
+    }
+
 }
